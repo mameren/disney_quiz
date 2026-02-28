@@ -1,5 +1,6 @@
 import { betterAuth } from 'better-auth';
 import { createClient } from '@libsql/client';
+import { LibsqlDialect } from '@libsql/kysely-libsql';
 
 const tursoClient = createClient({
   url: process.env.TURSO_DATABASE_URL,
@@ -7,10 +8,8 @@ const tursoClient = createClient({
 });
 
 export const auth = betterAuth({
-  database: {
-    type: 'libsql',
-    client: tursoClient,
-  },
+  // Kysely の LibsqlDialect を使って Turso に接続 (type:'libsql' は未対応)
+  database: new LibsqlDialect({ client: tursoClient }),
   emailAndPassword: {
     enabled: true,
   },
