@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__ide__getDiagnostics",
+      "Bash(true:*)",
+      "Bash(cd \"C:\\\\Users\\\\ren.mameda\\\\OneDrive - Accenture\\\\100_others\\\\01_free\" && node -e \"\nconst { createAuthClient } = await import\\('better-auth/react'\\);\nconst client = createAuthClient\\({ baseURL: '/api/auth' }\\);\nconsole.log\\('Keys:', Object.keys\\(client\\)\\);\nconsole.log\\('useSession type:', typeof client.useSession\\);\n\" 2>&1)",
+      "Bash(cd \"C:\\\\Users\\\\ren.mameda\\\\OneDrive - Accenture\\\\100_others\\\\01_free\" && npx @better-auth/cli migrate 2>&1)",
+      "Bash(cd \"C:\\\\Users\\\\ren.mameda\\\\OneDrive - Accenture\\\\100_others\\\\01_free\" && npx @better-auth/cli generate 2>&1)",
+      "Bash(cd:*)"
+    ]
+  }
+}

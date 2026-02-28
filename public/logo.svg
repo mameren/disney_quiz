@@ -1,0 +1,30 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="castleGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#8e2de2;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#4a00e0;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Mickey Shape Background -->
+  <circle cx="50" cy="60" r="35" fill="#111" />
+  <circle cx="150" cy="60" r="35" fill="#111" />
+  <circle cx="100" cy="110" r="60" fill="#111" />
+
+  <!-- Castle Silhouette Overlaid -->
+  <path d="M70 140 L70 100 L85 80 L100 60 L115 80 L130 100 L130 140 Z" fill="url(#castleGradient)" filter="url(#glow)"/>
+  <rect x="80" y="140" width="40" height="20" fill="url(#castleGradient)" filter="url(#glow)"/>
+  
+  <!-- Sparkles -->
+  <path d="M100 40 L102 35 L107 35 L103 32 L105 27 L100 30 L95 27 L97 32 L93 35 L98 35 Z" fill="#ffd700" />
+  <path d="M40 90 L42 85 L47 85 L43 82 L45 77 L40 80 L35 77 L37 82 L33 85 L38 85 Z" fill="#fff" opacity="0.8" />
+  <path d="M160 90 L162 85 L167 85 L163 82 L165 77 L160 80 L155 77 L157 82 L153 85 L158 85 Z" fill="#fff" opacity="0.8" />
+  
+</svg>
