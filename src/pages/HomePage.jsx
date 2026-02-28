@@ -1,121 +1,135 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useSession, signOut } from '../lib/auth-client';
+import { useSession } from '../lib/auth-client';
 
-const HomePage = () => {
-    const navigate = useNavigate();
-    const { data: session } = useSession();
+const features = [
+  {
+    icon: '🏆',
+    title: 'ディズニークイズ',
+    desc: 'キャラクター・アトラクション・歴史まで幅広いジャンルから出題。1人でも友達との早押し対戦も楽しめる！',
+    cta: 'クイズを始める →',
+    path: '/quiz',
+    accent: 'rgba(174, 99, 228, 0.5)',
+  },
+  {
+    icon: '🎡',
+    title: 'アトラクション\nルーレット',
+    desc: '「次はどこ行く？」と迷ったときのコンパス。ランド・シー・両方から条件を絞ってスピン！',
+    cta: 'ルーレットを回す →',
+    path: '/roulette',
+    accent: 'rgba(255, 64, 129, 0.5)',
+  },
+  {
+    icon: '🗓️',
+    title: '来園プラン作成',
+    desc: '誰と・何人で・どんなペースで回る？あなたの条件に合わせた当日プランをAIが自動生成。',
+    cta: 'プランを作る →',
+    path: '/plan',
+    accent: 'rgba(0, 188, 212, 0.5)',
+  },
+];
 
-    return (
-            <div className="glass-card home-card">
-                {/* <div className="logo-container">
-                    <img src="/logo.svg" alt="Pocket Jiminy" className="logo-img" />
-                </div> */}
+const stats = [
+  { value: '300+', label: 'クイズ問題数' },
+  { value: '700+', label: 'アトラクション数' },
+  { value: '3', label: '便利な機能' },
+  { value: '∞', label: '楽しみ方' },
+];
 
-                {/* ログイン状態バッジ */}
-                <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '8px' }}>
-                    {session?.user ? (
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                            <span style={{ fontSize: '13px', color: 'rgba(255,255,255,0.7)' }}>
-                                👤 {session.user.name || session.user.email}
-                            </span>
-                            <button
-                                onClick={() => navigate('/stats')}
-                                style={{ fontSize: '12px', padding: '4px 10px', borderRadius: '8px', border: '1px solid rgba(255,215,0,0.4)', background: 'transparent', color: 'rgba(255,215,0,0.8)', cursor: 'pointer' }}
-                            >
-                                📊 成績
-                            </button>
-                            <button
-                                onClick={() => signOut()}
-                                style={{ fontSize: '12px', padding: '4px 10px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.3)', background: 'transparent', color: 'rgba(255,255,255,0.6)', cursor: 'pointer' }}
-                            >
-                                ログアウト
-                            </button>
-                        </div>
-                    ) : (
-                        <button
-                            onClick={() => navigate('/auth')}
-                            style={{ fontSize: '12px', padding: '4px 12px', borderRadius: '8px', border: '1px solid rgba(255,215,0,0.5)', background: 'transparent', color: 'rgba(255,215,0,0.8)', cursor: 'pointer' }}
-                        >
-                            ログイン
-                        </button>
-                    )}
-                </div>
+export default function HomePage() {
+  const navigate = useNavigate();
+  const { data: session } = useSession();
 
-                <h1 className="title main-title">
-                    Pocket Jiminy
-                </h1>
-                <p className="subtitle home-subtitle">
-                    夢を開いて、心の赴くままに
-                </p>
+  return (
+    <div className="home-page">
+      {/* ── Hero ─────────────────────────────────────────── */}
+      <section className="hero-section">
+        <div className="hero-content">
+          <div className="hero-badge">🏰 ディズニーファン向け無料アプリ</div>
+          <h1 className="hero-title">
+            ディズニーをもっと<br />
+            <span className="hero-title-accent">深く、もっと楽しく。</span>
+          </h1>
+          <p className="hero-subtitle">
+            クイズで知識を試して、ルーレットで次の行き先を決めて、<br />
+            AIプランで最高の1日を設計しよう。
+          </p>
+          <div className="hero-ctas">
+            <button className="cta-primary" onClick={() => navigate('/quiz')}>
+              クイズを無料で始める →
+            </button>
+            <button className="cta-secondary" onClick={() => navigate('/roulette')}>
+              ルーレットを試す
+            </button>
+          </div>
+        </div>
 
-                <div className="grid-buttons home-grid">
-                    {/* Quiz Tool Card */}
-                    <div
-                        className="home-btn quiz-btn"
-                        onClick={() => navigate('/quiz')}
-                        role="button"
-                        tabIndex={0}
-                    >
-                        <div className="btn-icon">🏆</div>
-                        <div className="btn-content">
-                            <h3 className="btn-title">クイズ</h3>
-                            <p className="btn-desc">
-                                ディズニー知識を試そう！<br/>
-                                1人でも友達との対戦も！
-                            </p>
-                        </div>
-                        <div className="play-tag">
-                            PLAY QUIZ
-                        </div>
-                    </div>
+        <div className="hero-scroll-hint">
+          <span className="scroll-arrow">↓</span>
+        </div>
+      </section>
 
-                    {/* Attraction Roulette Card */}
-                    <div
-                        className="home-btn roulette-btn"
-                        onClick={() => navigate('/roulette')}
-                        role="button"
-                        tabIndex={0}
-                    >
-                        <div className="btn-icon">🎡</div>
-                        <div className="btn-content">
-                            <h3 className="btn-title">ルーレット</h3>
-                            <p className="btn-desc">
-                                「次はどこ行く？」<br/>
-                                迷った時のコンパス。
-                            </p>
-                        </div>
-                        <div className="play-tag" style={{background: 'linear-gradient(135deg, #ff4081, #c2185b)', boxShadow: '0 5px 15px rgba(255, 64, 129, 0.45)'}}>
-                            SPIN ROULETTE
-                        </div>
-                    </div>
-
-                    {/* Plan Card */}
-                    <div
-                        className="home-btn plan-btn"
-                        onClick={() => navigate('/plan')}
-                        role="button"
-                        tabIndex={0}
-                    >
-                        <div className="btn-icon">🗓️</div>
-                        <div className="btn-content">
-                            <h3 className="btn-title">プラン作成</h3>
-                            <p className="btn-desc">
-                                誰と・何人で・ペースは？<br/>
-                                あなただけの当日プラン！
-                            </p>
-                        </div>
-                        <div className="play-tag" style={{background: 'linear-gradient(135deg, #00bcd4, #0097a7)', boxShadow: '0 5px 15px rgba(0, 188, 212, 0.45)'}}>
-                            CREATE PLAN
-                        </div>
-                    </div>
-                </div>
-
-                <footer className="home-footer">
-                    <p>Designed for Disney Fans &nbsp;·&nbsp; © 2026 D-Fan World</p>
-                </footer>
+      {/* ── Stats bar ────────────────────────────────────── */}
+      <section className="stats-bar">
+        <div className="stats-inner">
+          {stats.map(({ value, label }) => (
+            <div key={label} className="stat-item">
+              <span className="stat-value">{value}</span>
+              <span className="stat-label">{label}</span>
             </div>
-    );
-};
+          ))}
+        </div>
+      </section>
 
-export default HomePage;
+      {/* ── Features ─────────────────────────────────────── */}
+      <section className="features-section">
+        <div className="features-inner">
+          <p className="section-eyebrow">FEATURES</p>
+          <h2 className="section-title">3つの機能で<br />ディズニーライフを充実させよう</h2>
+          <div className="features-grid">
+            {features.map(({ icon, title, desc, cta, path, accent }) => (
+              <div
+                key={path}
+                className="feature-card"
+                style={{ '--card-accent': accent }}
+                onClick={() => navigate(path)}
+              >
+                <div className="feature-icon">{icon}</div>
+                <h3 className="feature-title" style={{ whiteSpace: 'pre-line' }}>{title}</h3>
+                <p className="feature-desc">{desc}</p>
+                <span className="feature-cta">{cta}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── CTA Banner ───────────────────────────────────── */}
+      <section className="cta-banner">
+        <div className="cta-banner-inner">
+          <h2 className="cta-banner-title">さっそく試してみよう</h2>
+          <p className="cta-banner-sub">
+            {session?.user
+              ? `こんにちは、${session.user.name || session.user.email} さん！`
+              : 'ログインすると成績の記録・ジャンル別正答率が確認できます。'}
+          </p>
+          <div className="hero-ctas">
+            <button className="cta-primary" onClick={() => navigate('/quiz')}>
+              クイズを始める →
+            </button>
+            {!session?.user && (
+              <button className="cta-secondary" onClick={() => navigate('/auth')}>
+                無料ログイン
+              </button>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Footer ───────────────────────────────────────── */}
+      <footer className="site-footer">
+        <p>Designed for Disney Fans &nbsp;·&nbsp; © 2026 Pocket Jiminy</p>
+      </footer>
+    </div>
+  );
+}
